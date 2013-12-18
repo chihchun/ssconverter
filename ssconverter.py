@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 #
 # Convert spreadsheet to CSV file.
 #
@@ -119,7 +119,7 @@ class SSConverter:
                     else:
                         ofile = outputFile % sheet.getName().replace(' ', '_')
 
-                    if verbose: print "    %s" % ofile
+                    if verbose: print("    %s" % ofile)
 
                     # Save the sheet to the output file.
                     outputUrl = uno.systemPathToFileUrl(os.path.abspath(ofile))
@@ -148,10 +148,10 @@ if __name__ == "__main__":
         ooutils.oo_shutdown_if_running()
     else:
         if len(argv) < 3  or  len(argv) % 2 != 1:
-            print "USAGE:"
-            print "  python %s INPUT-FILE[:SHEET] OUTPUT-FILE ..." % argv[0]
-            print "OR"
-            print "  python %s --shutdown" % argv[0]
+            print("USAGE:")
+            print("  python %s INPUT-FILE[:SHEET] OUTPUT-FILE ..." % argv[0])
+            print("OR")
+            print("  python %s --shutdown" % argv[0])
             exit(255)
 
         try:
@@ -159,10 +159,10 @@ if __name__ == "__main__":
             converter = SSConverter()
 
             while i+1 < len(argv):
-                print '%s => %s' % (argv[i], argv[i+1])
+                print('%s => %s' % (argv[i], argv[i+1]))
                 converter.convert(argv[i], argv[i+1], True)
                 i += 2
 
-        except ErrorCodeIOException, exception:
-            print "ERROR! ErrorCodeIOException %d" % exception.ErrCode
+        except ErrorCodeIOException as exception:
+            print ("ERROR! ErrorCodeIOException %d" % exception.ErrCode)
             exit(1)
